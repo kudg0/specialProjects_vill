@@ -1,6 +1,7 @@
 //= include '_base.js'
 
 if (document.readyState === 'loading') {
+  //Так как события LOCATION/PAGE_READY на обычном локолхосте нет, мы его эмулируем с помощью события load
   !window.location.href.includes('localhost')
     ? configOfEventListeners(false, {
         target: window,
@@ -12,6 +13,7 @@ if (document.readyState === 'loading') {
         type: 'load',
         func: initJs,
       });
+  //END
 } else {
   initJs();
 }
