@@ -1,0 +1,15 @@
+@import 'helpers/_base';
+@import 'helpers/_fontsadd';
+@import 'helpers/_mixins';
+
+@import 'libs/_aos';
+
+[data-ui-id='post'] {
+  @media (min-width: 649px) {
+    @import 'start';
+  }
+
+  @media (max-width: 650px) {
+    @import 'mobile/mobile.scss';
+  }
+}
