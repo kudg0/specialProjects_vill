@@ -33,23 +33,17 @@ var inlinesource = require('gulp-inline-source');
 const paths = {
   dist: './dist/',
   src: './src',
-  maps: './maps',
 };
 const src = {
   html: paths.src + '/pages/index.html',
   partials: paths.src + '/partials/**/*.html',
-  img: paths.src + '/img/**/*',
   scss: paths.src + '/sass/',
   js: paths.src + '/js/',
-  fonts: paths.src + '/fonts',
-  public: paths.src + '/public',
 };
 const dist = {
   html: paths.dist + '/',
-  img: paths.dist + '/img/',
   css: paths.dist + '/',
   js: paths.dist + '/',
-  fonts: paths.dist + '/fonts/',
 };
 
 /**
@@ -119,14 +113,6 @@ function browserSyncReload(done) {
 }
 
 /**
- * Копирование шрифтов
- * @returns {*}
- */
-function copyFonts() {
-  return gulp.src([src.fonts + '/**/*']).pipe(gulp.dest(dist.fonts));
-}
-
-/**
  * Шаблонизация и склейка HTML
  * @returns {*}
  */
@@ -149,17 +135,6 @@ function htmlProcess() {
     )
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest(dist.html));
-}
-
-/**
- * Копирование картинок в dist или оптимизация при финишной сборке
- * @returns {*}
- */
-function imgProcess() {
-  return gulp
-    .src(src.img)
-    .pipe(changed(dist.img))
-    .pipe(gulp.dest(dist.img));
 }
 
 /**
@@ -199,16 +174,6 @@ function jsProcess() {
     .pipe(gulp.dest(dist.js));
 }
 
-/**
- * Копирование файлов из папки public в корень сайта при сборке
- * @returns {*}
- */
-function publicProcess() {
-  return gulp
-    .src([src.public + '/**/*.*', src.public + '/**/.*'])
-    .pipe(gulp.dest(paths.dist));
-}
-
 // Inline sources
 function inlineSource() {
   if (arg.production === 'true') {
@@ -244,26 +209,11 @@ function watchFiles() {
   );
 
   gulp.watch('./src/js' + '/**/*.*', gulp.series(jsProcess, browserSyncReload));
-
-  gulp.watch(
-    './src/img' + '/**/*.*',
-    gulp.series(imgProcess, browserSyncReload),
-  );
-
-  gulp.watch(src.fonts, gulp.series(copyFonts, browserSyncReload));
-  gulp.watch(src.public, gulp.series(publicProcess, browserSyncReload));
 }
 
 const build = gulp.series(
   clean,
-  gulp.parallel(
-    htmlProcess,
-    jsProcess,
-    scssProcess,
-    imgProcess,
-    copyFonts,
-    publicProcess,
-  ),
+  gulp.parallel(htmlProcess, jsProcess, scssProcess),
   inlineSource,
   cleanJsAndCss,
 );
