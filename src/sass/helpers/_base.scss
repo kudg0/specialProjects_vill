@@ -96,7 +96,7 @@
 }
 
 @media screen and (min-width: 850px) {
-  [data-id='vtb-multibonus-1391'] .villageSpecial__container .interactiveItem {
+  [data-ui-id='post'] .villageSpecial__container .interactiveItem {
     will-change: opacity, transform;
     transition: 0.3s opacity, 0.2s transform;
 
