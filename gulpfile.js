@@ -184,7 +184,7 @@ function inlineSource() {
           compress: false,
         }),
       )
-      .pipe(gulp.dest('public/'))
+      .pipe(gulp.dest('dist/'))
       .pipe(browserSync.stream());
   }
 }

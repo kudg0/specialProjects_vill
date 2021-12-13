@@ -1,11 +1,17 @@
 //= include '_base.js'
 
 if (document.readyState === 'loading') {
-  configOfEventListeners(false, {
-    target: window,
-    type: 'LOCATION/PAGE_READY',
-    func: initJs,
-  });
+  !window.location.href.includes('localhost')
+    ? configOfEventListeners(false, {
+        target: window,
+        type: 'LOCATION/PAGE_READY',
+        func: initJs,
+      })
+    : configOfEventListeners(false, {
+        target: window,
+        type: 'load',
+        func: initJs,
+      });
 } else {
   initJs();
 }
