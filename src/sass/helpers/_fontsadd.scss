@@ -1,14 +1,19 @@
-@mixin font-face($fontFamily) {
+@mixin font-face($fontFamily, $fontFamily_link, $fontFamily_format) {
   @font-face {
     font-family: '#{$fontFamily}';
-    src: url('fonts/#{$fontFamily}.woff2') format('woff2'),
-      url('fonts/#{$fontFamily}.woff') format('woff');
+    src: url('#{$fontFamily_link}') format('#{$fontFamily_format}');
 
     font-display: swap;
   }
 }
 
-@include font-face('EuclidCircularA-Regular');
-@include font-face('EuclidCircularA-Medium');
-
-@include font-face('GropledBold');
+@include font-face(
+  'IBM Plex Sans',
+  'https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2',
+  'woff2'
+);
+@include font-face(
+  'IBM Plex Serif',
+  'https://fonts.gstatic.com/s/ibmplexserif/v10/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zcZiVbJ.woff2',
+  'woff2'
+);
