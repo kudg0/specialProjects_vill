@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"author": "Ilya Brusenko (brusenkoilya@gmail.com)",
-	"repository": "https://github.com/kudg0/hero-samokat",
+	"repository": "https://github.com/kudg0/specialProjects_vill",
 	"license": "MIT",
 	"scripts": {
 		"start": "gulp",

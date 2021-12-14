@@ -33,6 +33,7 @@ var inlinesource = require('gulp-inline-source');
 const paths = {
   dist: './dist/',
   src: './src',
+  maps: './maps',
 };
 const src = {
   html: paths.src + '/pages/index.html',
@@ -134,7 +135,32 @@ function htmlProcess() {
       ]),
     )
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest(dist.html));
+    .pipe(gulp.dest(dist.html))
+    .pipe(browserSync.stream());
+}
+
+/**
+ * Добавление хеша скриптов и стилей в html для бустинга кеша
+ * @returns {*}
+ */
+function hashProcess() {
+  return gulp
+    .src(paths.dist + '/*.html')
+    .pipe(
+      hash_src({
+        build_dir: paths.dist,
+        src_path: paths.dist + '/js',
+        exts: ['.js'],
+      }),
+    )
+    .pipe(
+      hash_src({
+        build_dir: './dist',
+        src_path: paths.dist + '/css',
+        exts: ['.css'],
+      }),
+    )
+    .pipe(gulp.dest(paths.dist));
 }
 
 /**
@@ -151,7 +177,8 @@ function scssProcess() {
     .pipe(postcss(plugins))
     .pipe(prettier())
     .pipe(cleanCSS())
-    .pipe(gulp.dest(dist.css));
+    .pipe(gulp.dest(dist.css))
+    .pipe(browserSync.stream());
 }
 
 /**
@@ -216,6 +243,7 @@ const build = gulp.series(
   gulp.parallel(htmlProcess, jsProcess, scssProcess),
   inlineSource,
   cleanJsAndCss,
+  hashProcess,
 );
 
 const watch = gulp.parallel(build, watchFiles, browserSyncInit);
