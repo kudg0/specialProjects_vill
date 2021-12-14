@@ -3,9 +3,7 @@
 @import 'helpers/_mixins';
 
 @import 'libs/_aos';
-body {
-  background: red;
-}
+
 [data-ui-id='post'] {
   @media (min-width: 649px) {
     @import 'start';
