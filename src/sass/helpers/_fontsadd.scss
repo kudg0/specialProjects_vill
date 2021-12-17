@@ -6,14 +6,3 @@
     font-display: swap;
   }
 }
-
-@include font-face(
-  'IBM Plex Sans',
-  'https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2',
-  'woff2'
-);
-@include font-face(
-  'IBM Plex Serif',
-  'https://fonts.gstatic.com/s/ibmplexserif/v10/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zcZiVbJ.woff2',
-  'woff2'
-);
