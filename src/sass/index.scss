@@ -4,7 +4,14 @@
 
 @import 'libs/_aos';
 
-[data-ui-id='post'] {
+[data-ui-id='post'] .specialContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+
   @media (min-width: 649px) {
     @import 'start';
   }
