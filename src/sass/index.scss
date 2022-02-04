@@ -11,7 +11,9 @@
   align-items: flex-start;
 
   width: 100%;
+}
 
+[data-ui-id='post'] .specialContainer {
   @media (min-width: 649px) {
     @import 'start';
   }
